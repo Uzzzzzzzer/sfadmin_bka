@@ -1,0 +1,11 @@
+# Убираем файлы
+
+#ansible/ansible.cfg
+#ansible/hosts
+#ansible/hosts.bak
+#ansible/playbooks/*
+#ansible/roles/*
+#ansible/common/*
+
+
+#!ansible/playbooks/add_user.yml
