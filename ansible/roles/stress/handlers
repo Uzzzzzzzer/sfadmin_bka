@@ -1,0 +1,6 @@
+---
+- name: stress systemd
+  systemd:
+    name: stress
+    enabled: yes
+    state: started

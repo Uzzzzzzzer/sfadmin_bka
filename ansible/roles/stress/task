@@ -1,0 +1,18 @@
+---
+- name: CentOS Install Stress
+  yum:
+    name=stress
+    state=latest
+  when:
+    ansible_os_family == "RedHat"
+  notify:
+#    - stress systemd
+
+- name: Ubuntu Install Stress
+  apt:
+    name=stress
+    state=latest
+  when:
+    ansible_os_family == "Ubuntu"
+  notify:
+#    - stress systemd
