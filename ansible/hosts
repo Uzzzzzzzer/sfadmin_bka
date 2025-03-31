@@ -1,0 +1,15 @@
+[srv]
+exam-1 ansible_ssh_host=192.168.20.10 ansible_ssh_user=bka ansible_ssh_port=1223
+exam-2 ansible_ssh_host=192.168.20.28 ansible_ssh_user=bka ansible_ssh_port=1223
+exam-3 ansible_ssh_host=192.168.20.15 ansible_ssh_user=bka ansible_ssh_port=1223
+
+[ubuntu]
+exam-1 ansible_ssh_host=192.168.20.10 ansible_ssh_user=bka ansible_ssh_port=1223
+exam-2 ansible_ssh_host=192.168.20.28 ansible_ssh_user=bka ansible_ssh_port=1223
+
+[centos]
+exam-3 ansible_ssh_host=192.168.20.15 ansible_ssh_user=bka ansible_ssh_port=1223
+
+[openvpnclient]
+exam-2 ansible_ssh_host=192.168.20.28 ansible_ssh_user=bka ansible_ssh_port=1223
+exam-3 ansible_ssh_host=192.168.20.15 ansible_ssh_user=bka ansible_ssh_port=1223
