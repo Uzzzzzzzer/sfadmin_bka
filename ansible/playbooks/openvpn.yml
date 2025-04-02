@@ -1,6 +1,6 @@
 ---
 
-- hosts: exam-3
+- hosts: openvpnclient
   become: yes
 
   tasks:
