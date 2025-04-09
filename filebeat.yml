@@ -1,0 +1,57 @@
+filebeat.config.modules:
+    enabled: true
+    path: ${path.config}/modules.d/*.yml
+
+filebeat.inputs:
+#- type: log
+#  tags: ["mail"]
+#  paths:
+#    - /var/log/mail.log
+#  exclude_files: ['\.gz$']
+
+#- type: log
+#  tags: ["mail.err"]
+#  paths:
+#    - /var/log/mail.err
+#  exclude_files: ['\.gz$']
+
+#- type: log
+#  tags: ["sec"]
+#  paths:
+#    - /var/log/auth.log
+#  exclude_files: ['\.gz$']
+
+output.logstash:
+  hosts: ["10.8.0.30:5400"]
+  ssl.certificate_authorities: ["/etc/elk-certs/elk-ssl.crt"]
+  ssl.certificate: "/etc/elk-certs/elk-ssl.crt"
+  ssl.key: "/etc/elk-certs/elk-ssl.key"
+
+
+#-------------------------- Elasticsearch output ------------------------------
+#output.elasticsearch:
+  # Array of hosts to connect to.
+  #hosts: ["192.168.30.34:9200"]
+  #index: "myapp-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+  #setup.template.name: 'myapp'
+  #setup.template.pattern: 'myapp-*'
+  #setup.ilm.overwrite: true
+  #setup.ilm.enabled: false
+
+  #enabled: false
+
+  # Optional protocol and basic auth credentials.
+  #protocol: "https"
+  #username: "elastic"
+  #password: "!W123334W56!"
+
+setup.kibana.host: "http://10.8.0.20:5601"
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
