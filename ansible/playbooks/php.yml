@@ -1,0 +1,30 @@
+---
+
+- hosts: web
+  become: yes
+
+  tasks:
+  -  name: Install php7.4
+     apt:
+        name=php7.4
+        state=latest
+     notify:
+
+  -  name: Install php7.4-fpm
+     apt:
+        name=php7.4-fpm
+        state=latest
+     notify:
+        php7.4-fpm systemd
+
+  handlers:
+#  - name: apache2 systemd
+#    systemd:
+#      name: apache2.service
+#      enabled: yes
+#      state: started
+# - name: nginx systemd
+#    systemd:
+#      name: nginx.service
+#      enabled: yes
+#      state: started

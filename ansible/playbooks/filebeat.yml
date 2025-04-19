@@ -1,0 +1,42 @@
+---
+
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: Copy deb package
+    when:
+        ansible_os_family == "Debian"
+    copy:
+     src: /etc/ansible/common/file/elastic_7.14/filebeat-7.14.2-amd64.deb
+     dest: /opt/filebeat-7.14.2-amd64.deb
+
+  - name: Copy rpm package
+    when:
+        ansible_os_family == "RedHat"
+    copy:
+      src: /etc/ansible/common/file/elastic_7.14/filebeat-7.14.2-x86_64.rpm
+      dest: /opt/filebeat-7.14.2-x86_64.rpm
+
+  -  name: Install filebeat on CentOS
+     yum:
+       pkg: /opt/filebeat-7.14.2-x86_64.rpm
+     when:
+        ansible_os_family == "RedHat"
+     notify:
+        filebeat systemd
+
+  -  name: Install filebeat on Ubuntu
+     apt:
+        deb: /opt/filebeat-7.14.2-amd64.deb
+     when:
+        ansible_os_family == "Debian"
+     notify:
+        filebeat systemd
+
+  handlers:
+  - name: filebeat systemd
+    systemd:
+      name: filebeat.service
+      enabled: yes
+      state: started

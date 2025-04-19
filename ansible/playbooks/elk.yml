@@ -1,0 +1,41 @@
+---
+
+- hosts: centos
+  become: yes
+
+  tasks:
+  - name: Copy rpm package
+    when:
+        ansible_os_family == "RedHat"
+    copy:
+      src: /etc/ansible/common/file/elastic_7.14/
+      dest: /opt/
+      force: yes
+
+  -  name: Install ELK
+     yum:
+       pkg: "{{ item }}"
+     vars:
+       item:
+       - /opt/elasticsearch-7.14.2-x86_64.rpm
+       - /opt/kibana-7.14.2-x86_64.rpm
+       - /opt/logstash-7.14.2-x86_64.rpm
+
+  handlers:
+  - name: elasticsearch systemd
+    systemd:
+      name: elasticsearch.service
+      enabled: no
+      state: started
+
+  - name: kibana systemd
+    systemd:
+      name: kibana.service
+      enabled: no
+      state: started
+
+  - name: logstash systemd
+    systemd:
+      name: logstash.service
+      enabled: no
+      state: started
